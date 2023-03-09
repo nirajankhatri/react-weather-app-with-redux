@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "../../components/dashboard/Dashboard";
+import Dashboard from "../../components/dashboard/Dashboard";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Spinner from "../../components/spinner/Spinner";
 import { currentWeatherAction } from "../../redux/actions/weatherActions";
@@ -8,19 +8,28 @@ import { currentWeatherAction } from "../../redux/actions/weatherActions";
 const Home = () => {
   const dispatch = useDispatch();
 
-  // const [city, setCity] = useState("Kathmandu");
-
-  // const cityInputHandler = (input) => {
-  //   setCity(input);
-  // };
-
   const { loading, data, error } = useSelector((state) => state.weather);
 
-  console.log(data);
+  const [tempInfo, setTempInfo] = useState({temp: 0, unit: "C"});
 
   useEffect(() => {
     dispatch(currentWeatherAction("Kathmandu"));
   }, [dispatch]);
+
+  const unitChangeHandler = (toUnit) => {
+    let celciusBtn = document.getElementsByClassName("celcius")[0];
+    let fahrenheitBtn = document.getElementsByClassName("fahrenheit")[0];
+
+    if (toUnit === "f") {
+      celciusBtn.classList.remove("active");
+      fahrenheitBtn .classList.add("active");
+      setTempInfo({ temp: ((data.main.temp * 9) / 5 + 32).toFixed(2), unit: "F" });
+    } else if (toUnit === "c") {
+      fahrenheitBtn .classList.remove("active");
+      celciusBtn.classList.add("active");
+      setTempInfo({ temp: data.main.temp, unit: "C" });
+    }
+  };
 
   return (
     <div className="wrapper">
@@ -31,8 +40,7 @@ const Home = () => {
       ) : (
         <>
           <Sidebar
-            // inputHandler={cityInputHandler}
-            temperature={data.main.temp}
+            temperature={tempInfo}
             time={data.dt}
             city={data.name}
             sky={{
@@ -40,7 +48,8 @@ const Home = () => {
               icon: data.weather[0].icon,
             }}
           />
-          <Modal
+          <Dashboard
+            unitChangeHandler={unitChangeHandler}
             humidity={data.main.humidity}
             sun={{
               rise: data.sys.sunrise,

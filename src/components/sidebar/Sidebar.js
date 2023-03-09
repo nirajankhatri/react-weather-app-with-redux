@@ -57,8 +57,8 @@ const Sidebar = (props) => {
           </button>
         </form>
         <div className="temperature">
-          <h1 id="temp">{props.temperature}</h1>
-          <span className="temp-unit">°C</span>
+          <h1 id="temp">{props.temperature.temp}</h1>
+          <span className="temp-unit">°{props.temperature.unit}</span>
         </div>
         <div className="date-time">
           <p id="date-time">{toLocalDateTime(props.time)}</p>

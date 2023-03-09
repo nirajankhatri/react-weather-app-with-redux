@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "../card/Card";
 import Nav from "../nav/Nav";
 
@@ -11,10 +11,15 @@ const toLocalTime = (unix) => {
   return time;
 }
 
-const Modal = (props) => {
+const Dashboard = (props) => {
+
+  useEffect(() => {
+    props.unitChangeHandler("c");
+  }, [])
+
   return (
     <div className="dashboard">
-      <Nav />
+      <Nav unitChangeHandler={props.unitChangeHandler} />
       <div className="cards" id="weather-cards"></div>
       <div className="highlights">
         <h2 className="heading">today's highlights</h2>
@@ -31,4 +36,4 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+export default Dashboard;

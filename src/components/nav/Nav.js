@@ -1,15 +1,15 @@
 import React from "react";
 
-const Nav = () => {
+const Nav = (props) => {
   return (
     <nav>
       <ul className="options">
-        <button className="hourly">today</button>
-        <button className="week active">week</button>
+        <button className="hourly active">today</button>
+        <button className="week">week</button>
       </ul>
       <ul className="options units">
-        <button className="celcius active">°C</button>
-        <button className="fahrenheit">°F</button>
+        <button className="celcius" onClick={() => props.unitChangeHandler("c")} >°C</button>
+        <button className="fahrenheit" onClick={() => props.unitChangeHandler("f")} >°F</button>
       </ul>
     </nav>
   );
