@@ -1,21 +1,60 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import Modal from "../../components/modal/Modal";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Modal from "../../components/dashboard/Dashboard";
 import Sidebar from "../../components/sidebar/Sidebar";
+import Spinner from "../../components/spinner/Spinner";
 import { currentWeatherAction } from "../../redux/actions/weatherActions";
-import { CURRENT_WEATHER_REQUEST } from "../../redux/constants/weatherConstants";
 
 const Home = () => {
   const dispatch = useDispatch();
 
+  // const [city, setCity] = useState("Kathmandu");
+
+  // const cityInputHandler = (input) => {
+  //   setCity(input);
+  // };
+
+  const { loading, data, error } = useSelector((state) => state.weather);
+
+  console.log(data);
+
   useEffect(() => {
-    dispatch(currentWeatherAction());
+    dispatch(currentWeatherAction("Kathmandu"));
   }, [dispatch]);
 
   return (
     <div className="wrapper">
-      <Sidebar />
-      <Modal />
+      {loading ? (
+        <Spinner />
+      ) : error ? (
+        <h1>{error}</h1>
+      ) : (
+        <>
+          <Sidebar
+            // inputHandler={cityInputHandler}
+            temperature={data.main.temp}
+            time={data.dt}
+            city={data.name}
+            sky={{
+              main: data.weather[0].main,
+              icon: data.weather[0].icon,
+            }}
+          />
+          <Modal
+            humidity={data.main.humidity}
+            sun={{
+              rise: data.sys.sunrise,
+              set: data.sys.sunset,
+            }}
+            visibility={data.visibility}
+            wind={{
+              deg: data.wind.deg,
+              speed: data.wind.speed,
+            }}
+            pressure={data.main.pressure}
+          />
+        </>
+      )}
     </div>
   );
 };

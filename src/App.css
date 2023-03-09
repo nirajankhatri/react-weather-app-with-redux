@@ -13,24 +13,18 @@
 
 body {
   display: flex;
-  justify-content: center;
   height: 100vh;
-  min-width: 1000px;
   background: var(--primary-color);
   justify-content: center;
   align-items: center;
-}
-
-img {
-  width: 100%;
 }
 
 .wrapper {
   display: flex;
   width: 1200px;
   border-radius: 20px;
-  overflow: scroll;
   justify-content: flex-start;
+  border-radius: 10px;
 }
 
 .sidebar {
@@ -40,6 +34,8 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .search {
@@ -102,24 +98,15 @@ img {
 .search ul li.active {
   background-color: #f1f1f1;
 }
-.weather-icon {
-  width: 100%;
-  height: 150px;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.weather-icon #icon {
-  width: 80%;
-  object-fit: cover;
-}
 .temperature {
   display: flex;
+  margin-top: 100px;
 }
 .temperature #temp {
-  font-size: 70px;
+  font-size: 60px;
   font-weight: 100;
   line-height: 1;
+  color: #5598fd;
 }
 .temperature span {
   font-size: 40px;
@@ -129,7 +116,7 @@ img {
 .divider {
   width: 100%;
   height: 1px;
-  background: #e9ecef;
+  background: #72b9ff;
   margin: 20px 0;
 }
 .condition-rain {
@@ -152,25 +139,27 @@ img {
   gap: 10px;
   margin-top: 10px;
 }
-.modal {
+.dashboard {
   width: 100%;
   min-width: 400px;
   padding: 20px 40px;
   background-color: #f6f6f8;
   position: relative;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
-.modal nav {
+.dashboard nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.modal nav .options {
+.dashboard nav .options {
   display: flex;
   gap: 20px;
   align-items: center;
 }
-.modal nav .options button {
+.dashboard nav .options button {
   border: none;
   background: none;
   font-size: 16px;
@@ -179,22 +168,22 @@ img {
   cursor: pointer;
   text-transform: capitalize;
 }
-.modal nav .options button.active {
+.dashboard nav .options button.active {
   color: var(--primary-color);
 }
 
-.modal nav .units button {
+.dashboard nav .units button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   color: #1a1a1a;
   background-color: #fff;
 }
-.modal nav .units button.active {
+.dashboard nav .units button.active {
   color: #fff;
   background-color: #1a1a1a;
 }
-.modal .cards {
+.dashboard .cards {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
