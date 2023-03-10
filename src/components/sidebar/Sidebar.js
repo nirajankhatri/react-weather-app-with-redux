@@ -61,7 +61,7 @@ const Sidebar = (props) => {
             type="text"
             id="query"
             className="cityInput"
-            placeholder="Search..."
+            placeholder="Search city..."
             onChange={inputChangeHandler}
             value={city}
             autocomplete="off"
@@ -70,7 +70,7 @@ const Sidebar = (props) => {
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </form>
-        <div className="errorMessage">Please enter a task</div>
+        <div className="errorMessage">Please enter a city</div>
 
         <div className="temperature">
           <h1 id="temp">{props.temperature.temp}</h1>
