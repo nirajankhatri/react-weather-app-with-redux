@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Dashboard from "../../components/dashboard/Dashboard";
+import ErrorMessage from "../../components/errorMessage/ErrorMessage";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Spinner from "../../components/spinner/Spinner";
 import { currentWeatherAction } from "../../redux/actions/weatherActions";
@@ -10,7 +11,7 @@ const Home = () => {
 
   const { loading, data, error } = useSelector((state) => state.weather);
 
-  const [tempInfo, setTempInfo] = useState({temp: 0, unit: "C"});
+  const [tempInfo, setTempInfo] = useState({ temp: 0, unit: "C" });
 
   useEffect(() => {
     dispatch(currentWeatherAction("Kathmandu"));
@@ -22,10 +23,13 @@ const Home = () => {
 
     if (toUnit === "f") {
       celciusBtn.classList.remove("active");
-      fahrenheitBtn .classList.add("active");
-      setTempInfo({ temp: ((data.main.temp * 9) / 5 + 32).toFixed(2), unit: "F" });
+      fahrenheitBtn.classList.add("active");
+      setTempInfo({
+        temp: ((data.main.temp * 9) / 5 + 32).toFixed(2),
+        unit: "F",
+      });
     } else if (toUnit === "c") {
-      fahrenheitBtn .classList.remove("active");
+      fahrenheitBtn.classList.remove("active");
       celciusBtn.classList.add("active");
       setTempInfo({ temp: data.main.temp, unit: "C" });
     }
@@ -36,7 +40,7 @@ const Home = () => {
       {loading ? (
         <Spinner />
       ) : error ? (
-        <h1>{error}</h1>
+        <ErrorMessage errorMessage={error.message} />
       ) : (
         <>
           <Sidebar

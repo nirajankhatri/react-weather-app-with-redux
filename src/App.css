@@ -42,7 +42,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
   margin-top: 20px;
   position: relative;
 }
@@ -98,6 +97,22 @@ body {
 .search ul li.active {
   background-color: #f1f1f1;
 }
+
+.errorMessage {
+  font-size: 0.75rem;
+  color: rgb(248, 0, 0);
+  visibility: hidden;
+  padding: 5px;
+}
+
+.errorMessage--show {
+  visibility: visible;
+}
+
+.error {
+  border: solid 1px rgb(248, 0, 0) !important;
+}
+
 .temperature {
   display: flex;
   margin-top: 100px;

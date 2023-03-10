@@ -34,11 +34,23 @@ const Sidebar = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(currentWeatherAction(city));
+
+    if (city.trim() !== "") {
+      dispatch(currentWeatherAction(city));
+    } else {
+      document.getElementsByClassName('cityInput')[0].classList.add("error");
+      document
+        .getElementsByClassName("errorMessage")[0]
+        .classList.add("errorMessage--show");
+    }
   };
 
   const inputChangeHandler = (e) => {
     setCity(e.target.value);
+    document.getElementsByClassName('cityInput')[0].classList.remove("error");
+    document
+      .getElementsByClassName("errorMessage")[0]
+      .classList.remove("errorMessage--show");
   };
 
   return (
@@ -48,14 +60,18 @@ const Sidebar = (props) => {
           <input
             type="text"
             id="query"
+            className="cityInput"
             placeholder="Search..."
             onChange={inputChangeHandler}
             value={city}
+            autocomplete="off"
           />
           <button onClick={formSubmitHandler}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </form>
+        <div className="errorMessage">Please enter a task</div>
+
         <div className="temperature">
           <h1 id="temp">{props.temperature.temp}</h1>
           <span className="temp-unit">°{props.temperature.unit}</span>

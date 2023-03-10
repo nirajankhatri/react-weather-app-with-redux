@@ -10,13 +10,13 @@ export const currentWeatherReducer = (
 ) => {
   switch (action.type) {
     case CURRENT_WEATHER_REQUEST:
-      return { ...state, loading: true };
+      return { loading: true };
 
     case CURRENT_WEATHER_SUCCESS:
-      return { ...state, loading: false, data: action.payload };
+      return { loading: false, data: action.payload };
 
     case CURRENT_WEATHER_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+      return { loading: false, error: action.payload };
 
     default:
       return state;

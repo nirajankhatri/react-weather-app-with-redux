@@ -1,0 +1,18 @@
+.fetchError {
+  display: flex;
+  width: 100%;
+  line-height: 1;
+  justify-content: center;
+}
+
+.fetchError p {
+  padding: 20px 50px;
+  border-radius: 10px;
+  background-color: rgba(226, 23, 23, 0.342);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.fetchError p span {
+    margin-right: 20px;
+}
